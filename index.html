@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <script src="navbar.js" defer></script>
+  <title>Soft Wave - Accueil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Barre de navigation -->
+  <nav class="navbar">
+    <button class="burger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links">
+      <span class="Responsive-top4contact"></span>
+      <li><a href="#" class="activepage">Accueil</a></li>
+      <li class="dropdown">
+        <a href="#" tabindex="0">À propos</a>
+        <ul class="dropdown-menu">
+          <li><a href="histoire.html">Notre histoire</a></li>
+          <li><a href="projet.html">Projets</a></li>
+        </ul>
+      </li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="contact.html" class="Responsive-bottom4contact">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- Section d'accueil -->
+  <header class="header">
+    <div class="logo-text">
+      <img src="logo-o.png" alt="logo O" class="logo-o">
+      <p class="slogan">Des solutions web fluides, humaines et innovantes</p>
+    </div>
+    <a href="#" class="btn-devis">OBTENEZ UN DEVIS</a>
+  </header>
+  <main>
+    <section class="carousel-wrapper">
+      <h2>Pourquoi SoftWave ?</h2>
+      <div class="container">
+        <div class="carousel">
+          <div class="a">
+            <div class="item">Découvrez les avantages d’un <strong>site pro </strong>sans <strong>CMS</strong>
+            </div>
+          </div>
+          <div class="b">
+            <div class="item">Code propre,<br>optimisé<br>et sécurisé</div>
+          </div>
+          <div class="c">
+            <div class="item">Design unique<br>et sur-mesure</div>
+          </div>
+          <div class="d">
+            <div class="item">Performance<br>maximale</div>
+          </div>
+          <div class="e">
+            <div class="item">SEO<br>naturellement boosté</div>
+          </div>
+          <div class="f">
+            <div class="item">Accompagnement<br>humain & pro</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section id="services">
+      <h2>Nos services</h2>
+      <p>
+        SoftWave c’est avant tout de la qualité et un prix peu élevé.<br>
+        Nous mettons à <strong>votre</strong> disposition un <strong>site vitrine</strong> robuste, créé à la main en
+        pur code,<br>
+        offrant ainsi un contrôle total sur le contenu !
+      </p>
+
+      <h3>MAIS AUSSI</h3>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+          <p><strong>une assistance <span class="bold">7j/7</span></strong></p>
+          <span class="emoji">💪</span>
+        </div>
+
+        <div class="service-card">
+          <p>Création <strong><span class="bold">WordPress</span></strong></p>
+          <span class="emoji">🚀</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#">À propos</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Nos Services</h3>
+        <ul>
+          <li><a href="#">Création de site vitrine</a></li>
+          <li><a href="#">Optimisation SEO</a></li>
+          <li><a href="#">Maintenance</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Informations</h3>
+        <ul>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+          <li><a href="#">Conditions générales</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Nous contacter</h3>
+        <p>mail</p>
+        <p>num</p>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="LinkedIn">🔗</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 SoftWave. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    const carousel = $(".carousel"),
+      cards = $(".carousel > div"),
+      items = $(".item");
+
+    let currdeg = 0;
+    let currentIndex = 0;
+    const angle = 60;
+    const total = cards.length;
+    let interval;
+
+    function rotateCarousel(index) {
+      if (window.innerWidth <= 768) return;
+
+      currdeg = -angle * index;
+      carousel.css("transform", `rotateY(${currdeg}deg)`);
+      items.css("transform", `rotateY(${-currdeg}deg)`);
+      items.removeClass("active");
+      $(cards[index]).find(".item").addClass("active");
+    }
+
+    function startAutoRotation() {
+      if (window.innerWidth <= 768) return;
+
+      interval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % total;
+        rotateCarousel(currentIndex);
+      }, 3000);
+    }
+
+    function stopAutoRotation() {
+      clearInterval(interval);
+    }
+
+    $(window).on("resize", () => {
+      stopAutoRotation();
+      startAutoRotation();
+    });
+
+    startAutoRotation();
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth <= 768) {
+        carousel.removeAttr("style"); // remove 3D
+        items.removeAttr("style");
+      } else {
+        rotateCarousel(currentIndex); // remet la bonne vue
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>

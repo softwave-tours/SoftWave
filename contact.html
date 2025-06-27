@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <script src="navbar.js" defer></script>
+  <title>Soft Wave - Contact</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Barre de navigation -->
+  <nav class="navbar">
+    <button class="burger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="Responsive-top4contact">Accueil</a></li>
+      <li class="dropdown">
+        <a href="#" tabindex="0">À propos</a>
+        <ul class="dropdown-menu">
+          <li><a href="histoire.html">Notre histoire</a></li>
+          <li><a href="projet.html">Projets</a></li>
+        </ul>
+      </li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="#"class="activepage" >Contact</a></li>
+      <span class="Responsive-bottom4contact"></span>
+    </ul>
+  </nav>
+  <!-- Section d'accueil -->
+  <header class="header">
+    <div class="logo-text">
+      <img src="logo-o.png" alt="logo O" class="logo-o">
+      <p class="slogan">Des solutions web fluides, humaines et innovantes</p>
+    </div>
+    <a href="#" class="btn-devis">OBTENEZ UN DEVIS</a>
+  </header>
+
+
+  <section class="contact-section">
+
+    <h2>Contact-nous</h2>
+    <p>Tu as une question ? Un projet ? On t'écoute 👂</p>
+    <div id="quota-warning" style="display: none; color: red; margin-bottom: 1rem;">
+      Désolé, le formulaire est temporairement désactivé car la limite mensuelle a été atteinte. Reviens début du mois prochain ! 🙏
+    </div>
+    <form id="contact-form"method="POST">
+      <div class="form-group">
+        <input type="text" name="nom" placeholder="Ton prénom / nom" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Ton adresse email" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="sujet" placeholder="Sujet" required>
+      </div>
+      <div class="form-group">
+        <textarea name="message" placeholder="Ton message ici..." rows="5" required></textarea>
+      </div>
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+  
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#">À propos</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-section">
+        <h3>Nos Services</h3>
+        <ul>
+          <li><a href="#">Création de site vitrine</a></li>
+          <li><a href="#">Optimisation SEO</a></li>
+          <li><a href="#">Maintenance</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-section">
+        <h3>Informations</h3>
+        <ul>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+          <li><a href="#">Conditions générales</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-section">
+        <h3>Nous contacter</h3>
+        <p>mail</p>
+        <p>num</p>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="LinkedIn">🔗</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 SoftWave. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("feedback").textContent = "✅ Message envoyé (non réel pour l'instant)";
+      this.reset();
+    });
+  </script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+
+
+
+  // Initialise EmailJS
+  emailjs.init("AyHrTYKgdzA3SEedW"); // ta clé publique ici
+
+document.getElementById("contact-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const form = this;
+  const sujet = form.sujet.value.toLowerCase();
+  const message = form.message.value.toLowerCase();
+  const motsInterdits = ["stage", "stagiaire", "recherche de stage"];
+
+  const estUneDemandeDeStage = motsInterdits.some(mot => sujet.includes(mot) || message.includes(mot));
+
+  if (estUneDemandeDeStage) {
+    // Envoie l'email automatique de réponse stage
+    emailjs.sendForm("service_8jn009p", "template_jmisrsr", form)
+      .then(() => {
+        alert("Merci pour ton message ! Tu vas recevoir une réponse automatique.");
+        form.reset();
+      }, (error) => {
+        alert("Une erreur est survenue.");
+        console.error("Erreur EmailJS (stage):", error);
+      });
+  } else {
+    // Envoie normal
+    emailjs.sendForm("service_8jn009p", "template_2njbrhk", form)
+      .then(() => {
+        alert("Message bien envoyé ! Merci 😊");
+        form.reset();
+      }, (error) => {
+        alert("Erreur lors de l'envoi. Essaie plus tard.");
+        console.error("Erreur EmailJS (normal):", error);
+      });
+  }
+});
+</script>
+
+</body>
+</html>
