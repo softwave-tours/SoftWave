@@ -51,31 +51,31 @@
 
     <h2>Contact-nous</h2>
     <p>Tu as une question ? Un projet ? On t'écoute 👂</p>
-    <div id="quota-warning" style="display: none; color: red; margin-bottom: 1rem;">
-      Désolé, le formulaire est temporairement désactivé car la limite mensuelle a été atteinte. Reviens début du mois
-      prochain ! 🙏
-    </div>
-<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci.html">
-  <input type="hidden" name="form-name" value="contact" />
-  
-  <p hidden>
-    <label>Ne pas remplir ce champ : <input name="bot-field" /></label>
-  </p>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci">
+      <!-- Champ caché pour le nom du formulaire -->
+      <input type="hidden" name="form-name" value="contact" />
 
-  <label for="nom">Nom :</label>
-  <input type="text" id="nom" name="nom" required />
+      <!-- Honeypot anti-spam -->
+      <p style="display:none;">
+        <label>Ne pas remplir ce champ : <input name="bot-field" /></label>
+      </p>
 
-  <label for="email">Email :</label>
-  <input type="email" id="email" name="email" required />
+      <!-- Champs visibles -->
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" name="nom" required />
 
-  <label for="sujet">Sujet :</label>
-  <input type="text" id="sujet" name="sujet" required />
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" required />
 
-  <label for="message">Message :</label>
-  <textarea id="message" name="message" rows="5" required></textarea>
+      <label for="sujet">Sujet :</label>
+      <input type="text" id="sujet" name="sujet" required />
 
-  <button type="submit">Envoyer</button>
-</form>
+      <label for="message">Message :</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+
 
   </section>
 
