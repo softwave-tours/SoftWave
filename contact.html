@@ -51,26 +51,32 @@
 
     <h2>Contact-nous</h2>
     <p>Tu as une question ? Un projet ? On t'écoute 👂</p>
-    <form name="contact" netlify>
-      <p>
-        <label>Prénom/nom <input type="text" name="Prénom/nom" /></label>
-      </p>
-      <p>
-        <label>Adresse mail <input type="email" name="adresse mail" /></label>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <!-- Champ caché pour Netlify -->
+      <input type="hidden" name="form-name" value="contact" />
+
+      <!-- Honeypot anti-spam -->
+      <p style="display:none;">
+        <label>Ne pas remplir ce champ : <input name="bot-field" /></label>
       </p>
 
       <p>
-        <label>Sujet <input type="text" name="sujet"></label>
+        <label>Prénom / Nom: <input type="text" name="prenom_nom" required /></label>
       </p>
-
       <p>
-        <label>Message <input type="text" name="sujet"></label>
+        <label>Email: <input type="email" name="email" required /></label>
       </p>
-
       <p>
-        <button type="submit">Send</button>
+        <label>Sujet: <input type="text" name="sujet" required></label>
+      </p>
+      <p>
+        <label>Message: <textarea name="message" rows="5" required></textarea></label>
+      </p>
+      <p>
+        <button type="submit">Envoyer</button>
       </p>
     </form>
+
 
 
   </section>
