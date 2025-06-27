@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
   <script src="navbar.js" defer></script>
   <title>Soft Wave - Contact</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <!-- Barre de navigation -->
@@ -29,7 +33,7 @@
         </ul>
       </li>
       <li><a href="faq.html">FAQ</a></li>
-      <li><a href="#"class="activepage" >Contact</a></li>
+      <li><a href="#" class="activepage">Contact</a></li>
       <span class="Responsive-bottom4contact"></span>
     </ul>
   </nav>
@@ -48,25 +52,29 @@
     <h2>Contact-nous</h2>
     <p>Tu as une question ? Un projet ? On t'écoute 👂</p>
     <div id="quota-warning" style="display: none; color: red; margin-bottom: 1rem;">
-      Désolé, le formulaire est temporairement désactivé car la limite mensuelle a été atteinte. Reviens début du mois prochain ! 🙏
+      Désolé, le formulaire est temporairement désactivé car la limite mensuelle a été atteinte. Reviens début du mois
+      prochain ! 🙏
     </div>
-    <form id="contact-form"method="POST">
-      <div class="form-group">
-        <input type="text" name="nom" placeholder="Ton prénom / nom" required>
-      </div>
-      <div class="form-group">
-        <input type="email" name="email" placeholder="Ton adresse email" required>
-      </div>
-      <div class="form-group">
-        <input type="text" name="sujet" placeholder="Sujet" required>
-      </div>
-      <div class="form-group">
-        <textarea name="message" placeholder="Ton message ici..." rows="5" required></textarea>
-      </div>
+    <form name="contact" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="contact" />
+
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" name="nom" required />
+
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="sujet">Sujet :</label>
+      <input type="text" id="sujet" name="sujet" required />
+
+      <label for="message">Message :</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
       <button type="submit">Envoyer</button>
     </form>
+
   </section>
-  
+
 
   <footer class="footer">
     <div class="footer-container">
@@ -80,7 +88,7 @@
           <li><a href="#">Contact</a></li>
         </ul>
       </div>
-  
+
       <div class="footer-section">
         <h3>Nos Services</h3>
         <ul>
@@ -89,7 +97,7 @@
           <li><a href="#">Maintenance</a></li>
         </ul>
       </div>
-  
+
       <div class="footer-section">
         <h3>Informations</h3>
         <ul>
@@ -98,7 +106,7 @@
           <li><a href="#">Conditions générales</a></li>
         </ul>
       </div>
-  
+
       <div class="footer-section">
         <h3>Nous contacter</h3>
         <p>mail</p>
@@ -116,53 +124,14 @@
   </footer>
 
   <script>
-    document.getElementById("contact-form").addEventListener("submit", function(e) {
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
       e.preventDefault();
       document.getElementById("feedback").textContent = "✅ Message envoyé (non réel pour l'instant)";
       this.reset();
     });
   </script>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
 
-
-
-  // Initialise EmailJS
-  emailjs.init("AyHrTYKgdzA3SEedW"); // ta clé publique ici
-
-document.getElementById("contact-form").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const form = this;
-  const sujet = form.sujet.value.toLowerCase();
-  const message = form.message.value.toLowerCase();
-  const motsInterdits = ["stage", "stagiaire", "recherche de stage"];
-
-  const estUneDemandeDeStage = motsInterdits.some(mot => sujet.includes(mot) || message.includes(mot));
-
-  if (estUneDemandeDeStage) {
-    // Envoie l'email automatique de réponse stage
-    emailjs.sendForm("service_8jn009p", "template_jmisrsr", form)
-      .then(() => {
-        alert("Merci pour ton message ! Tu vas recevoir une réponse automatique.");
-        form.reset();
-      }, (error) => {
-        alert("Une erreur est survenue.");
-        console.error("Erreur EmailJS (stage):", error);
-      });
-  } else {
-    // Envoie normal
-    emailjs.sendForm("service_8jn009p", "template_2njbrhk", form)
-      .then(() => {
-        alert("Message bien envoyé ! Merci 😊");
-        form.reset();
-      }, (error) => {
-        alert("Erreur lors de l'envoi. Essaie plus tard.");
-        console.error("Erreur EmailJS (normal):", error);
-      });
-  }
-});
-</script>
 
 </body>
+
 </html>
