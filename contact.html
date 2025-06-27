@@ -51,30 +51,24 @@
 
     <h2>Contact-nous</h2>
     <p>Tu as une question ? Un projet ? On t'écoute 👂</p>
-    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci.html">
-      <!-- Champ caché pour le nom du formulaire -->
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
       <input type="hidden" name="form-name" value="contact" />
-
-      <!-- Honeypot anti-spam -->
       <p style="display:none;">
         <label>Ne pas remplir ce champ : <input name="bot-field" /></label>
       </p>
-
-      <!-- Champs visibles -->
-      <label for="nom">Nom :</label>
-      <input type="text" id="nom" name="nom" required />
-
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="email" required />
-
-      <label for="sujet">Sujet :</label>
-      <input type="text" id="sujet" name="sujet" required />
-
-      <label for="message">Message :</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
-
+      <label>Nom: <input type="text" name="nom" required></label>
+      <label>Email: <input type="email" name="email" required></label>
+      <label>Sujet: <input type="text" name="sujet" required></label>
+      <label>Message: <textarea name="message" required></textarea></label>
       <button type="submit">Envoyer</button>
     </form>
+
+    <div id="confirmation-popup" style="display:none; position: fixed; top: 20%; left: 50%; transform: translate(-50%, -50%); 
+  background: white; border: 1px solid #ccc; padding: 20px; z-index: 1000;">
+      <p>Merci pour votre message !</p>
+      <button onclick="document.getElementById('confirmation-popup').style.display='none'">Fermer</button>
+    </div>
+
 
 
   </section>
@@ -128,6 +122,30 @@
   </footer>
 
 
+  <script>
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // On crée un FormData pour l'envoyer
+      const data = new FormData(form);
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Accept': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data).toString()
+      })
+        .then(response => {
+          if (response.ok) {
+            form.reset();
+            document.getElementById('confirmation-popup').style.display = 'block';
+          } else {
+            alert('Erreur lors de l’envoi. Essaie plus tard.');
+          }
+        })
+        .catch(() => alert('Erreur lors de l’envoi. Essaie plus tard.'));
+    });
+  </script>
 
 </body>
 
